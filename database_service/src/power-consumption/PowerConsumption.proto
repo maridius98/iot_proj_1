@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package pc;
+
+message PowerConsumption {
+  string id = 1;
+  float global_active_power = 2;
+  float global_reactive_power = 3;
+  float voltage = 4;
+  float global_intensity = 5;
+  int64 timestamp = 6;
+}
+
+message Reply {
+  string message = 1;
+}
+
+message TimestampRange {
+  int64 start_time_stamp = 1;
+  int64 end_time_stamp = 2;
+}
+
+message Value {
+  float value = 1;
+}
+
+message PowerConsumptionId {
+  string id = 1;
+}
+
+service PowerConsumptionService {
+  rpc Create(PowerConsumption) returns (Reply) {}
+  rpc Read(PowerConsumptionId) returns (PowerConsumption) {}
+  rpc Update(PowerConsumption) returns (Reply) {}
+  rpc Delete(PowerConsumptionId) returns (Reply) {}
+  rpc Min(TimestampRange) returns (Value) {}
+  rpc Max(TimestampRange) returns (Value) {}
+  rpc Avg(TimestampRange) returns (Value) {}
+  rpc Sum(TimestampRange) returns (Value) {}
+}
