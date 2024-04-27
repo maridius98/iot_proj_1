@@ -1,16 +1,16 @@
 from fastapi import FastAPI
-from grpclib.client import Channel
+from grpc import insecure_channel
 from google.protobuf.timestamp_pb2 import Timestamp
 from src.Pydantic import PowerConsumptionReply, Reply
-from .PowerConsumption_pb2 import PowerConsumption, PowerConsumptionId
-from .PowerConsumption_pb2_grpc import PowerConsumptionServiceStub
+from src.PowerConsumption_pb2 import PowerConsumption, PowerConsumptionId
+from src.PowerConsumption_pb2_grpc import PowerConsumptionServiceStub
 
 app = FastAPI()
 
 @app.on_event("startup")
 async def startup_event():
     global channel
-    channel = Channel(host='server', port=50051)
+    channel = insecure_channel('server:50051')
 
 @app.on_event("shutdown")
 async def shutdown_event():
@@ -25,7 +25,7 @@ async def get(id: str) -> PowerConsumptionReply:
     return response
 
 @app.post("/")
-async def post(power_consumption: PowerConsumption) -> Reply:
+async def post(power_consumption: PowerConsumptionReply) -> Reply:
     stub = PowerConsumptionServiceStub(channel)
     response = await stub.Create(power_consumption)
     return response

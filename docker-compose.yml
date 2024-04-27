@@ -18,6 +18,8 @@ services:
       context: ./rest_service
       dockerfile: Dockerfile
     container_name: iot1_client
+    environment:
+      - PYTHONPATH=.
     ports:
       - "8081:8080"
     depends_on:
