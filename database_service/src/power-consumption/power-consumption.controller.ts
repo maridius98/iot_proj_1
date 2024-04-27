@@ -1,35 +1,30 @@
 import { Controller } from '@nestjs/common';
 import { GrpcMethod, MessagePattern, Payload } from '@nestjs/microservices';
 import { PowerConsumptionService } from './power-consumption.service';
-import { CreatePowerConsumptionDto } from './dto/create-power-consumption.dto';
-import { UpdatePowerConsumptionDto } from './dto/update-power-consumption.dto';
+import { Metadata, ServerUnaryCall } from '@grpc/grpc-js';
+import { PowerConsumptionId, PowerConsumption, Reply, TimestampRange} from './power-consumption-proto.interface';
 
 @Controller()
 export class PowerConsumptionController {
   constructor(private readonly powerConsumptionService: PowerConsumptionService) {}
 
-  @GrpcMethod('createPowerConsumption')
-  create(@Payload() createPowerConsumptionDto: CreatePowerConsumptionDto) {
-    return this.powerConsumptionService.create(createPowerConsumptionDto);
+  @GrpcMethod('PowerConsumptionService')
+  async create(data: PowerConsumption, metadata: Metadata, call: ServerUnaryCall<any, any>) {
+    return await this.powerConsumptionService.create(data);
   }
 
-  @MessagePattern('findAllPowerConsumption')
-  findAll() {
-    return this.powerConsumptionService.findAll();
+  @GrpcMethod('PowerConsumptionService')
+  async read(data: PowerConsumptionId) {
+    return await this.powerConsumptionService.findOne(data.id);
   }
 
-  @MessagePattern('findOnePowerConsumption')
-  findOne(@Payload() id: number) {
-    return this.powerConsumptionService.findOne(id);
+  @GrpcMethod('PowerConsumptionService')
+  async update(data: PowerConsumption) {
+    return await this.powerConsumptionService.update(data);
   }
 
-  @MessagePattern('updatePowerConsumption')
-  update(@Payload() updatePowerConsumptionDto: UpdatePowerConsumptionDto) {
-    return this.powerConsumptionService.update(updatePowerConsumptionDto.id, updatePowerConsumptionDto);
-  }
-
-  @MessagePattern('removePowerConsumption')
-  remove(@Payload() id: number) {
-    return this.powerConsumptionService.remove(id);
+  @GrpcMethod('PowerConsumptionService')
+  async remove(data: PowerConsumptionId) {
+    return await this.powerConsumptionService.remove(data.id);
   }
 }

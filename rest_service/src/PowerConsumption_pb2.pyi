@@ -4,7 +4,7 @@ from typing import ClassVar as _ClassVar, Optional as _Optional
 
 DESCRIPTOR: _descriptor.FileDescriptor
 
-class PowerConsumptionRecord(_message.Message):
+class PowerConsumption(_message.Message):
     __slots__ = ("id", "global_active_power", "global_reactive_power", "voltage", "global_intensity", "timestamp")
     ID_FIELD_NUMBER: _ClassVar[int]
     GLOBAL_ACTIVE_POWER_FIELD_NUMBER: _ClassVar[int]
@@ -27,12 +27,12 @@ class Reply(_message.Message):
     def __init__(self, message: _Optional[str] = ...) -> None: ...
 
 class TimestampRange(_message.Message):
-    __slots__ = ("start_time_stamp", "end_time_stamp")
-    START_TIME_STAMP_FIELD_NUMBER: _ClassVar[int]
-    END_TIME_STAMP_FIELD_NUMBER: _ClassVar[int]
-    start_time_stamp: int
-    end_time_stamp: int
-    def __init__(self, start_time_stamp: _Optional[int] = ..., end_time_stamp: _Optional[int] = ...) -> None: ...
+    __slots__ = ("start_timestamp", "end_timestamp")
+    START_TIMESTAMP_FIELD_NUMBER: _ClassVar[int]
+    END_TIMESTAMP_FIELD_NUMBER: _ClassVar[int]
+    start_timestamp: int
+    end_timestamp: int
+    def __init__(self, start_timestamp: _Optional[int] = ..., end_timestamp: _Optional[int] = ...) -> None: ...
 
 class Value(_message.Message):
     __slots__ = ("value",)
@@ -40,7 +40,7 @@ class Value(_message.Message):
     value: float
     def __init__(self, value: _Optional[float] = ...) -> None: ...
 
-class PowerConsumptionRecordId(_message.Message):
+class PowerConsumptionId(_message.Message):
     __slots__ = ("id",)
     ID_FIELD_NUMBER: _ClassVar[int]
     id: str

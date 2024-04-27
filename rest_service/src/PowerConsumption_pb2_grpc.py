@@ -5,7 +5,7 @@ import grpc
 import PowerConsumption_pb2 as PowerConsumption__pb2
 
 
-class PowerConsumptionStub(object):
+class PowerConsumptionServiceStub(object):
     """Missing associated documentation comment in .proto file."""
 
     def __init__(self, channel):
@@ -15,48 +15,48 @@ class PowerConsumptionStub(object):
             channel: A grpc.Channel.
         """
         self.Create = channel.unary_unary(
-                '/pc.PowerConsumption/Create',
-                request_serializer=PowerConsumption__pb2.PowerConsumptionRecord.SerializeToString,
+                '/pc.PowerConsumptionService/Create',
+                request_serializer=PowerConsumption__pb2.PowerConsumption.SerializeToString,
                 response_deserializer=PowerConsumption__pb2.Reply.FromString,
                 )
         self.Read = channel.unary_unary(
-                '/pc.PowerConsumption/Read',
-                request_serializer=PowerConsumption__pb2.PowerConsumptionRecordId.SerializeToString,
-                response_deserializer=PowerConsumption__pb2.PowerConsumptionRecord.FromString,
+                '/pc.PowerConsumptionService/Read',
+                request_serializer=PowerConsumption__pb2.PowerConsumptionId.SerializeToString,
+                response_deserializer=PowerConsumption__pb2.PowerConsumption.FromString,
                 )
         self.Update = channel.unary_unary(
-                '/pc.PowerConsumption/Update',
-                request_serializer=PowerConsumption__pb2.PowerConsumptionRecord.SerializeToString,
+                '/pc.PowerConsumptionService/Update',
+                request_serializer=PowerConsumption__pb2.PowerConsumption.SerializeToString,
                 response_deserializer=PowerConsumption__pb2.Reply.FromString,
                 )
         self.Delete = channel.unary_unary(
-                '/pc.PowerConsumption/Delete',
-                request_serializer=PowerConsumption__pb2.PowerConsumptionRecordId.SerializeToString,
+                '/pc.PowerConsumptionService/Delete',
+                request_serializer=PowerConsumption__pb2.PowerConsumptionId.SerializeToString,
                 response_deserializer=PowerConsumption__pb2.Reply.FromString,
                 )
         self.Min = channel.unary_unary(
-                '/pc.PowerConsumption/Min',
+                '/pc.PowerConsumptionService/Min',
                 request_serializer=PowerConsumption__pb2.TimestampRange.SerializeToString,
                 response_deserializer=PowerConsumption__pb2.Value.FromString,
                 )
         self.Max = channel.unary_unary(
-                '/pc.PowerConsumption/Max',
+                '/pc.PowerConsumptionService/Max',
                 request_serializer=PowerConsumption__pb2.TimestampRange.SerializeToString,
                 response_deserializer=PowerConsumption__pb2.Value.FromString,
                 )
         self.Avg = channel.unary_unary(
-                '/pc.PowerConsumption/Avg',
+                '/pc.PowerConsumptionService/Avg',
                 request_serializer=PowerConsumption__pb2.TimestampRange.SerializeToString,
                 response_deserializer=PowerConsumption__pb2.Value.FromString,
                 )
         self.Sum = channel.unary_unary(
-                '/pc.PowerConsumption/Sum',
+                '/pc.PowerConsumptionService/Sum',
                 request_serializer=PowerConsumption__pb2.TimestampRange.SerializeToString,
                 response_deserializer=PowerConsumption__pb2.Value.FromString,
                 )
 
 
-class PowerConsumptionServicer(object):
+class PowerConsumptionServiceServicer(object):
     """Missing associated documentation comment in .proto file."""
 
     def Create(self, request, context):
@@ -108,26 +108,26 @@ class PowerConsumptionServicer(object):
         raise NotImplementedError('Method not implemented!')
 
 
-def add_PowerConsumptionServicer_to_server(servicer, server):
+def add_PowerConsumptionServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'Create': grpc.unary_unary_rpc_method_handler(
                     servicer.Create,
-                    request_deserializer=PowerConsumption__pb2.PowerConsumptionRecord.FromString,
+                    request_deserializer=PowerConsumption__pb2.PowerConsumption.FromString,
                     response_serializer=PowerConsumption__pb2.Reply.SerializeToString,
             ),
             'Read': grpc.unary_unary_rpc_method_handler(
                     servicer.Read,
-                    request_deserializer=PowerConsumption__pb2.PowerConsumptionRecordId.FromString,
-                    response_serializer=PowerConsumption__pb2.PowerConsumptionRecord.SerializeToString,
+                    request_deserializer=PowerConsumption__pb2.PowerConsumptionId.FromString,
+                    response_serializer=PowerConsumption__pb2.PowerConsumption.SerializeToString,
             ),
             'Update': grpc.unary_unary_rpc_method_handler(
                     servicer.Update,
-                    request_deserializer=PowerConsumption__pb2.PowerConsumptionRecord.FromString,
+                    request_deserializer=PowerConsumption__pb2.PowerConsumption.FromString,
                     response_serializer=PowerConsumption__pb2.Reply.SerializeToString,
             ),
             'Delete': grpc.unary_unary_rpc_method_handler(
                     servicer.Delete,
-                    request_deserializer=PowerConsumption__pb2.PowerConsumptionRecordId.FromString,
+                    request_deserializer=PowerConsumption__pb2.PowerConsumptionId.FromString,
                     response_serializer=PowerConsumption__pb2.Reply.SerializeToString,
             ),
             'Min': grpc.unary_unary_rpc_method_handler(
@@ -152,12 +152,12 @@ def add_PowerConsumptionServicer_to_server(servicer, server):
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'pc.PowerConsumption', rpc_method_handlers)
+            'pc.PowerConsumptionService', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
 
 
  # This class is part of an EXPERIMENTAL API.
-class PowerConsumption(object):
+class PowerConsumptionService(object):
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
@@ -171,8 +171,8 @@ class PowerConsumption(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/pc.PowerConsumption/Create',
-            PowerConsumption__pb2.PowerConsumptionRecord.SerializeToString,
+        return grpc.experimental.unary_unary(request, target, '/pc.PowerConsumptionService/Create',
+            PowerConsumption__pb2.PowerConsumption.SerializeToString,
             PowerConsumption__pb2.Reply.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
@@ -188,9 +188,9 @@ class PowerConsumption(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/pc.PowerConsumption/Read',
-            PowerConsumption__pb2.PowerConsumptionRecordId.SerializeToString,
-            PowerConsumption__pb2.PowerConsumptionRecord.FromString,
+        return grpc.experimental.unary_unary(request, target, '/pc.PowerConsumptionService/Read',
+            PowerConsumption__pb2.PowerConsumptionId.SerializeToString,
+            PowerConsumption__pb2.PowerConsumption.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -205,8 +205,8 @@ class PowerConsumption(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/pc.PowerConsumption/Update',
-            PowerConsumption__pb2.PowerConsumptionRecord.SerializeToString,
+        return grpc.experimental.unary_unary(request, target, '/pc.PowerConsumptionService/Update',
+            PowerConsumption__pb2.PowerConsumption.SerializeToString,
             PowerConsumption__pb2.Reply.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
@@ -222,8 +222,8 @@ class PowerConsumption(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/pc.PowerConsumption/Delete',
-            PowerConsumption__pb2.PowerConsumptionRecordId.SerializeToString,
+        return grpc.experimental.unary_unary(request, target, '/pc.PowerConsumptionService/Delete',
+            PowerConsumption__pb2.PowerConsumptionId.SerializeToString,
             PowerConsumption__pb2.Reply.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
@@ -239,7 +239,7 @@ class PowerConsumption(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/pc.PowerConsumption/Min',
+        return grpc.experimental.unary_unary(request, target, '/pc.PowerConsumptionService/Min',
             PowerConsumption__pb2.TimestampRange.SerializeToString,
             PowerConsumption__pb2.Value.FromString,
             options, channel_credentials,
@@ -256,7 +256,7 @@ class PowerConsumption(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/pc.PowerConsumption/Max',
+        return grpc.experimental.unary_unary(request, target, '/pc.PowerConsumptionService/Max',
             PowerConsumption__pb2.TimestampRange.SerializeToString,
             PowerConsumption__pb2.Value.FromString,
             options, channel_credentials,
@@ -273,7 +273,7 @@ class PowerConsumption(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/pc.PowerConsumption/Avg',
+        return grpc.experimental.unary_unary(request, target, '/pc.PowerConsumptionService/Avg',
             PowerConsumption__pb2.TimestampRange.SerializeToString,
             PowerConsumption__pb2.Value.FromString,
             options, channel_credentials,
@@ -290,7 +290,7 @@ class PowerConsumption(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/pc.PowerConsumption/Sum',
+        return grpc.experimental.unary_unary(request, target, '/pc.PowerConsumptionService/Sum',
             PowerConsumption__pb2.TimestampRange.SerializeToString,
             PowerConsumption__pb2.Value.FromString,
             options, channel_credentials,
