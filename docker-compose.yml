@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile
     container_name: iot1_server
     ports:
-      - "8080:8080"
+      - "3000:3000"
     depends_on:
       - db
     networks:
@@ -21,7 +21,7 @@ services:
     environment:
       - PYTHONPATH=.
     ports:
-      - "8081:8080"
+      - "8000:8000"
     depends_on:
       - server
     networks:

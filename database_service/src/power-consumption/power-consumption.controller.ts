@@ -8,8 +8,9 @@ import { PowerConsumptionId, PowerConsumption, Reply, TimestampRange} from './po
 export class PowerConsumptionController {
   constructor(private readonly powerConsumptionService: PowerConsumptionService) {}
 
-  @GrpcMethod('PowerConsumptionService')
+  @GrpcMethod('PowerConsumptionService', 'Create')
   async create(data: PowerConsumption, metadata: Metadata, call: ServerUnaryCall<any, any>) {
+    console.log(JSON.stringify(data))
     return await this.powerConsumptionService.create(data);
   }
 

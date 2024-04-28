@@ -10,5 +10,5 @@ class PowerConsumptionReply(BaseModel):
 
 
 class Reply(BaseModel):
-    reply: str
+    message: str
 

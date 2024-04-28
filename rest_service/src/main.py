@@ -10,7 +10,7 @@ app = FastAPI()
 @app.on_event("startup")
 async def startup_event():
     global channel
-    channel = insecure_channel('server:50051')
+    channel = insecure_channel('server:3000')
 
 @app.on_event("shutdown")
 async def shutdown_event():
@@ -25,7 +25,9 @@ async def get(id: str) -> PowerConsumptionReply:
     return response
 
 @app.post("/")
-async def post(power_consumption: PowerConsumptionReply) -> Reply:
+def post(req: PowerConsumptionReply) -> Reply:
     stub = PowerConsumptionServiceStub(channel)
-    response = await stub.Create(power_consumption)
+    power_consumption = PowerConsumption(**req.model_dump())
+    response = stub.Create(power_consumption)
+    print(response)
     return response
